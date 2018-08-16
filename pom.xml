@@ -19,6 +19,7 @@
         <spring.boot.version>2.0.4.RELEASE</spring.boot.version>
         <lombok.version>1.16.16</lombok.version>
         <guava.version>26.0-jre</guava.version>
+        <spring.swagger.version>2.9.2</spring.swagger.version>
         <start-class>com.inventnow.projectx.Application</start-class>
     </properties>
 
@@ -38,6 +39,7 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -54,11 +56,24 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
             <version>${spring.boot.version}</version>
         </dependency>
+
+        <!--Spring Swagger version-->
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.7</version>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${spring.swagger.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${spring.swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-bean-validators</artifactId>
+            <version>${spring.swagger.version}</version>
+        </dependency>
+
         <!-- Micormeter core dependecy  -->
         <dependency>
             <groupId>io.micrometer</groupId>
@@ -68,6 +83,13 @@
         <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-prometheus</artifactId>
+        </dependency>
+
+        <!--3rd party-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.7</version>
         </dependency>
     </dependencies>
 

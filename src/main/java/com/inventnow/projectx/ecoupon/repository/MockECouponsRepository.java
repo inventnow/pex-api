@@ -1,8 +1,8 @@
-package com.inventnow.projectx.coupon.repository;
+package com.inventnow.projectx.ecoupon.repository;
 
 import com.google.common.collect.Lists;
-import com.inventnow.projectx.coupon.dto.ECoupon;
-import com.inventnow.projectx.coupon.dto.ECoupons;
+import com.inventnow.projectx.ecoupon.dto.ECoupon;
+import com.inventnow.projectx.ecoupon.dto.ECoupons;
 import org.springframework.stereotype.Repository;
 
 @Repository

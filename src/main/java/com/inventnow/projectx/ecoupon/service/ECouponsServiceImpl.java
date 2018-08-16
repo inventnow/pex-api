@@ -1,7 +1,7 @@
-package com.inventnow.projectx.coupon.service;
+package com.inventnow.projectx.ecoupon.service;
 
-import com.inventnow.projectx.coupon.dto.ECoupons;
-import com.inventnow.projectx.coupon.repository.MockECouponsRepository;
+import com.inventnow.projectx.ecoupon.dto.ECoupons;
+import com.inventnow.projectx.ecoupon.repository.MockECouponsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

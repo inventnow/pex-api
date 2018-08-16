@@ -1,4 +1,4 @@
-package com.inventnow.projectx.coupon.dto;
+package com.inventnow.projectx.ecoupon.dto;
 
 import lombok.Data;
 
