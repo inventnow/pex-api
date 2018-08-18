@@ -1,4 +1,4 @@
-package com.inventnow.projectx.config;
+package com.inventnow.projectx.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,8 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 
-import static com.inventnow.projectx.authorization.dto.RoleEnum.CUSTOMER_UPDATE;
-import static com.inventnow.projectx.authorization.dto.RoleEnum.CUSTOMER_VIEW;
+import static com.inventnow.projectx.security.RoleEnum.CUSTOMER_UPDATE;
+import static com.inventnow.projectx.security.RoleEnum.CUSTOMER_VIEW;
 
 @Configuration
 @EnableOAuth2Client

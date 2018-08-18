@@ -1,4 +1,4 @@
-package com.inventnow.projectx.authorization.dto;
+package com.inventnow.projectx.security;
 
 public enum RoleEnum {
 
