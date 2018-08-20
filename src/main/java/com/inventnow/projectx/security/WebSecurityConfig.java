@@ -2,25 +2,28 @@ package com.inventnow.projectx.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 
+import static com.inventnow.projectx.security.RoleEnum.CUSTOMER_DELETE;
+import static com.inventnow.projectx.security.RoleEnum.CUSTOMER_READ;
 import static com.inventnow.projectx.security.RoleEnum.CUSTOMER_UPDATE;
-import static com.inventnow.projectx.security.RoleEnum.CUSTOMER_VIEW;
 
 @Configuration
 @EnableOAuth2Client
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean()
-            throws Exception{
+            throws Exception {
         return super.authenticationManagerBean();
     }
 
@@ -31,10 +34,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
+    public void configure(WebSecurity web) throws Exception {
+        web
+                .ignoring()
+                .antMatchers("/v2/api-docs", "/configuration/**", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/api-docs/**")
+                .antMatchers("/actuator/**");
+    }
+
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/swagger*").permitAll()
-                .antMatchers("/v1/ecoupons/**").hasAuthority(CUSTOMER_VIEW.name())
+                .antMatchers(HttpMethod.GET, "/v1/ecoupons/**").hasAnyAuthority(CUSTOMER_READ.name())
+                .antMatchers(HttpMethod.PUT, "/v1/ecoupons/**").hasAnyAuthority(CUSTOMER_UPDATE.name())
+                .antMatchers(HttpMethod.POST, "/v1/ecoupons/**").hasAnyAuthority(CUSTOMER_UPDATE.name())
+                .antMatchers(HttpMethod.DELETE, "/v1/ecoupons/**").hasAnyAuthority(CUSTOMER_DELETE.name())
                 .anyRequest().denyAll();
     }
 
@@ -43,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication()
                 .withUser("user")
                 .password(passwordEncoder().encode("password"))
-                .roles(CUSTOMER_VIEW.name(), CUSTOMER_UPDATE.name());
+                .roles(CUSTOMER_READ.name(), CUSTOMER_UPDATE.name());
     }
 
     @Bean

@@ -16,7 +16,7 @@ import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import javax.sql.DataSource;
 
 @Configuration
-public class SecurityOAuth2Config extends AuthorizationServerConfigurerAdapter {
+public class SecurityOAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -34,25 +34,20 @@ public class SecurityOAuth2Config extends AuthorizationServerConfigurerAdapter {
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
                 .withClient("pex")
+                .accessTokenValiditySeconds(30000)
                 .secret(passwordEncoder.encode("secret"))
                 .authorizedGrantTypes("refresh_token", "password", "client_credentials")
                 .scopes("webclient", "mobileclient");
     }
 
     @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints){
         endpoints
                 .tokenStore(tokenStore())
                 .authenticationManager(authenticationManager)
                 .userDetailsService(userDetailsService);
     }
 
-
-    @Override
-    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.tokenKeyAccess("permitAll()")
-                .checkTokenAccess("isAuthenticated()");
-    }
 
     @Bean
     public TokenStore tokenStore() {
