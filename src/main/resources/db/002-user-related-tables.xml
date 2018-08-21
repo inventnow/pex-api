@@ -8,16 +8,18 @@
 
     <changeSet id="002" author="eldrid.aditya">
         <comment>user table</comment>
-        <createTable tableName="user">
-            <column name="id" type="BIGINT"></column>
-            <column name="username" type="VARCHAR(50)"></column>
-            <column name="password" type="VARCHAR(255)"></column>
+        <createSequence incrementBy="1" startValue="500000" sequenceName="seq_user"/>
+        <createTable tableName="users">
+            <column name="id" type="${key}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="username" type="${smallString}"></column>
+            <column name="password" type="${smallString}"></column>
             <column name="account_non_expired" type="boolean"></column>
             <column name="account_non_locked" type="boolean"></column>
             <column name="credentials_non_expired" type="boolean"></column>
             <column name="enabled" type="boolean"></column>
         </createTable>
-        <addPrimaryKey tableName="user" columnNames="id"/>
     </changeSet>
 
 </databaseChangeLog>

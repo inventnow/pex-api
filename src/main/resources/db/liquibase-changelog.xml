@@ -4,6 +4,20 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
+    <property name="now" value="CURRENT_TIMESTAMP" dbms="postgresql"/>
+
+    <property name="key" value="number(14)"/>
+    <property name="enumString" value="varchar(64)"/>
+    <property name="smallString" value="varchar(128)"/>
+    <property name="mediumString" value="varchar(512)"/>
+    <property name="longString" value="varchar(2000)"/>
+    <property name="date" value="date"/>
+    <property name="timestamp" value="timestamp"/>
+    <property name="now" value="now()"/>
+    <property name="money" value="money"/>
+    <property name="realNumber" value="numeric(16,4)"/>
+    <property name="integer" value="int"/>
+
     <include file="001-oauth2-schema.xml" relativeToChangelogFile="true"/>
     <include file="002-user-related-tables.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
