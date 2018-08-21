@@ -5,4 +5,5 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <include file="001-oauth2-schema.xml" relativeToChangelogFile="true"/>
+    <include file="002-user-related-tables.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
