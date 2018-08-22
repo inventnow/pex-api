@@ -8,6 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.util.Date;
 
 @Entity
 @Table(name = "users")
@@ -30,4 +33,7 @@ public class UserEntity {
     private boolean enabled;
 
     private String roles;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdon;
 }

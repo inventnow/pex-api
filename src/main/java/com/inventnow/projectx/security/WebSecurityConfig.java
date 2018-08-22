@@ -1,24 +1,26 @@
 package com.inventnow.projectx.security;
 
-import com.inventnow.projectx.user.service.PexUserDetailsServiceImpl;
+import com.inventnow.projectx.user.service.PexUserSecurityServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 
-import static com.inventnow.projectx.security.RoleEnum.ADMIN;
-import static com.inventnow.projectx.security.RoleEnum.CUSTOMER_DELETE;
-import static com.inventnow.projectx.security.RoleEnum.CUSTOMER_READ;
-import static com.inventnow.projectx.security.RoleEnum.CUSTOMER_UPDATE;
+import static com.inventnow.projectx.security.RoleEnum.PEX_ADMIN;
+import static com.inventnow.projectx.security.RoleEnum.CUSTOMER;
+import static com.inventnow.projectx.security.RoleEnum.VISITOR;
 
 @Configuration
 @EnableOAuth2Client
@@ -26,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     @Qualifier("userDetailsService")
-    private PexUserDetailsServiceImpl userDetailsService;
+    private PexUserSecurityServiceImpl userDetailsService;
 
     @Override
     @Bean
@@ -51,14 +53,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Override
+    @Order(Ordered.HIGHEST_PRECEDENCE)
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/v1/**").hasAnyAuthority(ADMIN.name())
-                .antMatchers(HttpMethod.GET, "/v1/ecoupons/**").hasAnyAuthority(CUSTOMER_READ.name())
-                .antMatchers(HttpMethod.PUT, "/v1/ecoupons/**").hasAnyAuthority(CUSTOMER_UPDATE.name())
-                .antMatchers(HttpMethod.POST, "/v1/ecoupons/**").hasAnyAuthority(CUSTOMER_UPDATE.name())
-                .antMatchers(HttpMethod.DELETE, "/v1/ecoupons/**").hasAnyAuthority(CUSTOMER_DELETE.name())
-                .anyRequest().denyAll();
+        http
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .csrf().disable()
+                .authorizeRequests()
+                .anyRequest().authenticated()
+                .and()
+                .httpBasic()
+                .realmName("PEX_REALM");
     }
 
     @Override
