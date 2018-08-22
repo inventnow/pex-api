@@ -26,11 +26,11 @@
         <comment>insert initial user</comment>
         <insert tableName="users">
             <column name="id" value="5000001"/>
-            <column name="username" value="user"></column>
+            <column name="username" value="bedhes@gmail.com"></column>
             <column name="first_name" value="Bedhes"></column>
             <column name="last_name" value="User"></column>
-            <column name="password" value="password"></column>
-            <column name="roles" value="CUSTOMER_READ,CUSTOMER_WRITE"></column>
+            <column name="password" value="$2a$10$XstEmOlC.ozlJnRIa91qc.2j/0IF7j0oS02cL3RAOCXSck6qFO9.a"></column>
+            <column name="roles" value="ADMIN"></column>
             <column name="enabled" valueBoolean="true"></column>
         </insert>
     </changeSet>
