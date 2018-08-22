@@ -6,7 +6,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <changeSet id="002" author="eldrid.aditya">
+    <changeSet id="002001" author="eldrid.aditya">
         <comment>user table</comment>
         <createSequence incrementBy="1" startValue="500000" sequenceName="seq_user"/>
         <createTable tableName="users">
@@ -14,12 +14,25 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="username" type="${smallString}"></column>
+            <column name="first_name" type="${longString}"></column>
+            <column name="last_name" type="${longString}"></column>
             <column name="password" type="${smallString}"></column>
-            <column name="account_non_expired" type="boolean"></column>
-            <column name="account_non_locked" type="boolean"></column>
-            <column name="credentials_non_expired" type="boolean"></column>
+            <column name="roles" type="${longString}"></column>
             <column name="enabled" type="boolean"></column>
         </createTable>
+    </changeSet>
+
+    <changeSet id="002002" author="eldrid.aditya">
+        <comment>insert initial user</comment>
+        <insert tableName="users">
+            <column name="id" value="5000001"/>
+            <column name="username" value="user"></column>
+            <column name="first_name" value="Bedhes"></column>
+            <column name="last_name" value="User"></column>
+            <column name="password" value="password"></column>
+            <column name="roles" value="CUSTOMER_READ,CUSTOMER_WRITE"></column>
+            <column name="enabled" valueBoolean="true"></column>
+        </insert>
     </changeSet>
 
 </databaseChangeLog>

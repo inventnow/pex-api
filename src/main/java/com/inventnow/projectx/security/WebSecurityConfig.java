@@ -1,5 +1,8 @@
 package com.inventnow.projectx.security;
 
+import com.inventnow.projectx.user.service.PexUserDetailsServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -12,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 
+import static com.inventnow.projectx.security.RoleEnum.ADMIN;
 import static com.inventnow.projectx.security.RoleEnum.CUSTOMER_DELETE;
 import static com.inventnow.projectx.security.RoleEnum.CUSTOMER_READ;
 import static com.inventnow.projectx.security.RoleEnum.CUSTOMER_UPDATE;
@@ -19,6 +23,10 @@ import static com.inventnow.projectx.security.RoleEnum.CUSTOMER_UPDATE;
 @Configuration
 @EnableOAuth2Client
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    @Qualifier("userDetailsService")
+    private PexUserDetailsServiceImpl userDetailsService;
 
     @Override
     @Bean
@@ -45,6 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/v1/**").hasAnyAuthority(ADMIN.name())
                 .antMatchers(HttpMethod.GET, "/v1/ecoupons/**").hasAnyAuthority(CUSTOMER_READ.name())
                 .antMatchers(HttpMethod.PUT, "/v1/ecoupons/**").hasAnyAuthority(CUSTOMER_UPDATE.name())
                 .antMatchers(HttpMethod.POST, "/v1/ecoupons/**").hasAnyAuthority(CUSTOMER_UPDATE.name())
@@ -54,10 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("user")
-                .password(passwordEncoder().encode("password"))
-                .roles(CUSTOMER_READ.name(), CUSTOMER_UPDATE.name());
+        auth.userDetailsService(userDetailsService);
     }
 
     @Bean

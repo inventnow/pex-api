@@ -104,6 +104,11 @@
             <artifactId>micrometer-registry-prometheus</artifactId>
         </dependency>
 
+        <!--TEST-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
         <!--3rd party-->
         <dependency>
             <groupId>org.projectlombok</groupId>
