@@ -20,6 +20,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/v1/ecoupons/**").hasAnyAuthority(CUSTOMER.name(), ADMIN.name())
+                .antMatchers("/v1/user/admin/**").hasAnyAuthority(ADMIN.name(), MERCHANT_CASHIER.name(), MERCHANT_SUPERVISOR.name())
                 .antMatchers("/v1/user/**").hasAnyAuthority(CUSTOMER.name(), ADMIN.name(), MERCHANT_CASHIER.name(), MERCHANT_SUPERVISOR.name())
                 .antMatchers(HttpMethod.POST, "/v1/merchant/transaction").hasAnyAuthority(ADMIN.name(), MERCHANT_CASHIER.name(), MERCHANT_SUPERVISOR.name())
                 .antMatchers(HttpMethod.POST, "/v1/merchant/securitycode").hasAnyAuthority(ADMIN.name(), MERCHANT_SUPERVISOR.name())
