@@ -3,14 +3,16 @@ package com.inventnow.projectx.transaction.dto;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 public class TransactionDto {
 
-    private Date transactionDate;
+    private LocalDate transactionDate;
 
-    private Long totalPoints;
+    private Long pointsEarned;
 
-    private BigDecimal totalAmount;
+    private BigDecimal transactionAmount;
+
+    private Merchant merchant;
 }
