@@ -17,6 +17,7 @@
     <properties>
         <java.version>1.8</java.version>
         <spring.boot.version>2.0.4.RELEASE</spring.boot.version>
+        <spring.cloud.security.version>2.0.0.RELEASE</spring.cloud.security.version>
         <lombok.version>1.16.16</lombok.version>
         <guava.version>26.0-jre</guava.version>
         <spring.swagger.version>2.9.2</spring.swagger.version>
@@ -27,6 +28,9 @@
         <postgres.jdbc.version>9.4.1212</postgres.jdbc.version>
         <mockito.version>1.10.19</mockito.version>
         <start-class>com.inventnow.projectx.Application</start-class>
+        <spring-cloud-starter-oauth2.version>1.2.2.RELEASE</spring-cloud-starter-oauth2.version>
+        <junit.version>4.12</junit.version>
+        <commons-lang3.version>3.7</commons-lang3.version>
     </properties>
 
     <dependencies>
@@ -57,13 +61,18 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-security</artifactId>
-            <version>2.0.0.RELEASE</version>
+            <version>${spring.cloud.security.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-oauth2</artifactId>
-            <version>1.2.2.RELEASE</version>
+            <version>${spring-cloud-starter-oauth2.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-hateoas</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -109,7 +118,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -133,7 +142,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.7</version>
+            <version>${commons-lang3.version}</version>
         </dependency>
     </dependencies>
 
