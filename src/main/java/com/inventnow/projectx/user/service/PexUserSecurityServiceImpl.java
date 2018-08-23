@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import static org.springframework.security.core.authority.AuthorityUtils.createAuthorityList;
+import static org.springframework.security.core.authority.AuthorityUtils.commaSeparatedStringToAuthorityList;
 
 @Service("userDetailsService")
 public class PexUserSecurityServiceImpl implements UserDetailsService {
@@ -20,6 +20,6 @@ public class PexUserSecurityServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserEntity userEntity = userRepository.findByUsername(username);
-        return new User(username, userEntity.getPassword(), createAuthorityList(userEntity.getRoles()));
+        return new User(username, userEntity.getPassword(), commaSeparatedStringToAuthorityList(userEntity.getRoles()));
     }
 }

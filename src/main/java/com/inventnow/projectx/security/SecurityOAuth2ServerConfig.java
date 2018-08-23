@@ -1,6 +1,8 @@
 package com.inventnow.projectx.security;
 
+import com.inventnow.projectx.user.service.PexUserSecurityServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,7 +23,8 @@ public class SecurityOAuth2ServerConfig extends AuthorizationServerConfigurerAda
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    @Qualifier("userDetailsService")
+    private PexUserSecurityServiceImpl userDetailsService;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
