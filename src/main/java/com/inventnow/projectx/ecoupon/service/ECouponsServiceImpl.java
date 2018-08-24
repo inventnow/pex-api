@@ -14,4 +14,9 @@ public class ECouponsServiceImpl implements ECouponsService {
     public ECoupons getECoupons(Long userId) {
         return eCouponsRepository.eCoupons();
     }
+
+    @Override
+    public void activateECoupons(Long ecouponId, Long userId) {
+
+    }
 }

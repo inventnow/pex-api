@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
-public class UserDto {
+public class User {
 
     @NotNull
     private String email;

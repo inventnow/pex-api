@@ -1,6 +1,6 @@
 package com.inventnow.projectx.user.controller;
 
-import com.inventnow.projectx.user.dto.UserDto;
+import com.inventnow.projectx.user.dto.User;
 import com.inventnow.projectx.user.service.UserRegistrationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -23,8 +23,8 @@ public class UserAdminController {
     @PostMapping("/registration")
     @ApiOperation("User registration, return 201 if successfully created")
     @ResponseStatus(HttpStatus.CREATED)
-    public void registerUser(@RequestBody UserDto userDto) {
-        userRegistrationService.registerUser(userDto);
+    public void registerUser(@RequestBody User user) {
+        userRegistrationService.registerUser(user);
     }
 
    

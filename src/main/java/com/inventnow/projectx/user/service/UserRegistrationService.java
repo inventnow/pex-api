@@ -1,8 +1,8 @@
 package com.inventnow.projectx.user.service;
 
-import com.inventnow.projectx.user.dto.UserDto;
+import com.inventnow.projectx.user.dto.User;
 
 public interface UserRegistrationService {
 
-    UserDto registerUser(UserDto userDto);
+    User registerUser(User user);
 }

@@ -2,7 +2,7 @@ package com.inventnow.projectx.user.service;
 
 import com.inventnow.projectx.exception.BadRequestException;
 import com.inventnow.projectx.security.RoleEnum;
-import com.inventnow.projectx.user.dto.UserDto;
+import com.inventnow.projectx.user.dto.User;
 import com.inventnow.projectx.user.entity.UserEntity;
 import com.inventnow.projectx.user.exception.UserAlreadyRegisteredException;
 import com.inventnow.projectx.user.repository.UserRepository;
@@ -22,29 +22,29 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public UserDto registerUser(UserDto userDto) {
-        if (userRepository.findByUsername(userDto.getEmail()) != null) {
-            throw new UserAlreadyRegisteredException("Email : " + userDto.getEmail() + " already registered");
+    public User registerUser(User user) {
+        if (userRepository.findByUsername(user.getEmail()) != null) {
+            throw new UserAlreadyRegisteredException("Email : " + user.getEmail() + " already registered");
         }
-        if (!userDto.getPassword().equals(userDto.getConfirmPassword())) {
+        if (!user.getPassword().equals(user.getConfirmPassword())) {
             throw new BadRequestException("Password and Confirm Password not match");
         }
         UserEntity userEntity = new UserEntity();
-        userEntity.setFirstName(userDto.getFirstName());
-        userEntity.setLastName(userDto.getLastName());
+        userEntity.setFirstName(user.getFirstName());
+        userEntity.setLastName(user.getLastName());
         userEntity.setEnabled(true);
-        userEntity.setUsername(userDto.getEmail());
-        userEntity.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
+        userEntity.setUsername(user.getEmail());
+        userEntity.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userEntity.setCreatedon(new Date());
 
         StringBuilder sbRole = new StringBuilder();
-        for (RoleEnum roleEnum : userDto.getRoles()) {
+        for (RoleEnum roleEnum : user.getRoles()) {
             sbRole.append(roleEnum.name());
             sbRole.append(",");
         }
         sbRole.deleteCharAt(sbRole.length() - 1);
         userEntity.setRoles(sbRole.toString().trim());
         userRepository.save(userEntity);
-        return userDto;
+        return user;
     }
 }

@@ -5,7 +5,7 @@ import lombok.Value;
 
 @Value
 @AllArgsConstructor
-public class PromoDto {
+public class Promo {
 
     private Long promoId;
 

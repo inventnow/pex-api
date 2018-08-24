@@ -6,7 +6,7 @@ import lombok.Data;
 public class CustomerDto {
 
 
-    private UserDto user;
+    private User user;
 
     private IdentityType identityType;
 

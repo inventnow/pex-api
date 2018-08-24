@@ -2,7 +2,7 @@ package com.inventnow.projectx.user.service;
 
 import com.google.common.collect.Lists;
 import com.inventnow.projectx.security.RoleEnum;
-import com.inventnow.projectx.user.dto.UserDto;
+import com.inventnow.projectx.user.dto.User;
 import com.inventnow.projectx.user.entity.UserEntity;
 import com.inventnow.projectx.user.exception.UserAlreadyRegisteredException;
 import com.inventnow.projectx.user.repository.UserRepository;
@@ -39,14 +39,14 @@ public class UserRegistrationServiceImplTest {
     @Test
     public void registerUser() {
         //given
-        UserDto userDto = new UserDto();
-        userDto.setEmail("abc@gmail.com");
-        userDto.setFirstName("Bedhesh");
-        userDto.setLastName("User");
-        userDto.setRoles(Lists.newArrayList(RoleEnum.MERCHANT_CASHIER, RoleEnum.MERCHANT_SUPERVISOR));
+        User user = new User();
+        user.setEmail("abc@gmail.com");
+        user.setFirstName("Bedhesh");
+        user.setLastName("User");
+        user.setRoles(Lists.newArrayList(RoleEnum.MERCHANT_CASHIER, RoleEnum.MERCHANT_SUPERVISOR));
 
         //when
-        userRegistrationService.registerUser(userDto);
+        userRegistrationService.registerUser(user);
 
         //then
         verify(userRepository).save(userEntityArgumentCaptor.capture());
@@ -62,18 +62,18 @@ public class UserRegistrationServiceImplTest {
     @Test
     public void registerUser_AlreadyExistEmail() {
         //given
-        UserDto userDto = new UserDto();
-        userDto.setEmail("abc@gmail.com");
-        userDto.setFirstName("Bedhesh");
-        userDto.setLastName("User");
+        User user = new User();
+        user.setEmail("abc@gmail.com");
+        user.setFirstName("Bedhesh");
+        user.setLastName("User");
 
-        when(userRepository.findByUsername(userDto.getEmail())).thenThrow(new UserAlreadyRegisteredException("Email : abc@gmail.com already registered"));
+        when(userRepository.findByUsername(user.getEmail())).thenThrow(new UserAlreadyRegisteredException("Email : abc@gmail.com already registered"));
 
         //then
         expectedException.expect(UserAlreadyRegisteredException.class);
         expectedException.expectMessage("Email : abc@gmail.com already registered");
         //when
-        userRegistrationService.registerUser(userDto);
+        userRegistrationService.registerUser(user);
 
     }
 }
