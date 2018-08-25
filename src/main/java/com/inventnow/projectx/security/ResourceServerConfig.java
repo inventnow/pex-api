@@ -11,6 +11,7 @@ import static com.inventnow.projectx.security.RoleEnum.ADMIN;
 import static com.inventnow.projectx.security.RoleEnum.CUSTOMER;
 import static com.inventnow.projectx.security.RoleEnum.MERCHANT_CASHIER;
 import static com.inventnow.projectx.security.RoleEnum.MERCHANT_SUPERVISOR;
+import static com.inventnow.projectx.security.RoleEnum.VISITOR;
 
 @Configuration
 @EnableResourceServer
@@ -20,12 +21,13 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/v1/ecoupons/**").hasAnyAuthority(CUSTOMER.name(), ADMIN.name())
-                .antMatchers("/v1/user/admin/**").hasAnyAuthority(ADMIN.name(), MERCHANT_CASHIER.name(), MERCHANT_SUPERVISOR.name())
-                .antMatchers("/v1/user/**").hasAnyAuthority(CUSTOMER.name(), ADMIN.name(), MERCHANT_CASHIER.name(), MERCHANT_SUPERVISOR.name())
-                .antMatchers(HttpMethod.POST, "/v1/merchant/transaction").hasAnyAuthority(ADMIN.name(), MERCHANT_CASHIER.name(), MERCHANT_SUPERVISOR.name())
-                .antMatchers(HttpMethod.POST, "/v1/merchant/securitycode").hasAnyAuthority(ADMIN.name(), MERCHANT_SUPERVISOR.name())
-                .antMatchers(HttpMethod.GET, "/v1/merchant/*").hasAnyAuthority(ADMIN.name(), MERCHANT_SUPERVISOR.name())
-                .antMatchers(HttpMethod.GET, "/v1/transactions/*").hasAnyAuthority(ADMIN.name(), CUSTOMER.name(), MERCHANT_SUPERVISOR.name())
+                .antMatchers("/v1/users/admin/**").hasAnyAuthority(ADMIN.name(), MERCHANT_CASHIER.name(), MERCHANT_SUPERVISOR.name())
+                .antMatchers("/v1/users/**").hasAnyAuthority(CUSTOMER.name(), ADMIN.name(), MERCHANT_CASHIER.name(), MERCHANT_SUPERVISOR.name())
+                .antMatchers("/v1/registration/**").hasAnyAuthority(CUSTOMER.name(), ADMIN.name(), VISITOR.name())
+                .antMatchers(HttpMethod.POST, "/v1/merchants/transaction").hasAnyAuthority(ADMIN.name(), MERCHANT_CASHIER.name(), MERCHANT_SUPERVISOR.name())
+                .antMatchers(HttpMethod.POST, "/v1/merchants/securitycode").hasAnyAuthority(ADMIN.name(), MERCHANT_SUPERVISOR.name())
+                .antMatchers(HttpMethod.GET, "/v1/merchants/**").hasAnyAuthority(ADMIN.name(), MERCHANT_SUPERVISOR.name())
+                .antMatchers(HttpMethod.GET, "/v1/transactions/**").hasAnyAuthority(ADMIN.name(), CUSTOMER.name(), MERCHANT_SUPERVISOR.name())
                 .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
     }
 }

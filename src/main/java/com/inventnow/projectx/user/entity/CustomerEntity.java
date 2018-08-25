@@ -3,19 +3,19 @@ package com.inventnow.projectx.user.entity;
 import com.inventnow.projectx.user.dto.IdentityType;
 import lombok.Data;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,9 +29,8 @@ public class CustomerEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_customers")
     private Long id;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "CARD_ID")
-    private List<CardEntity> cards;
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CardEntity> cards = new ArrayList<>();
 
     private String firstName;
 

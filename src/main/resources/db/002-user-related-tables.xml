@@ -32,7 +32,6 @@
             <column name="id" type="${key}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="card_id" type="${key}"></column>
             <column name="first_name" type="${longString}"></column>
             <column name="last_name" type="${longString}"></column>
             <column name="city_of_birth" type="${smallString}"></column>
@@ -59,6 +58,7 @@
             <column name="id" type="${key}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="customer_id" type="${key}"></column>
             <column name="card_no" type="${smallString}"></column>
             <column name="status" type="${enumString}"></column>
             <column name="createdon" type="${timestamp}"></column>
@@ -68,14 +68,11 @@
 
     <changeSet id="002003" author="eldrid.aditya">
         <comment>create fk and indices</comment>
-        <addForeignKeyConstraint baseTableName="customers" baseColumnNames="card_id"
-                                 constraintName="fk_customer_cards" referencedTableName="cards"
+        <addForeignKeyConstraint baseTableName="cards" baseColumnNames="customer_id"
+                                 constraintName="fk_cards_customer" referencedTableName="customers"
                                  referencedColumnNames="id"/>
-        <createIndex tableName="customers" indexName="idx_customer_card_id">
-            <column name="card_id"></column>
-        </createIndex>
-        <createIndex tableName="cards" indexName="idx_cards_card_no">
-            <column name="card_no"></column>
+        <createIndex tableName="cards" indexName="idx_card_customer_id">
+            <column name="customer_id"></column>
         </createIndex>
         <addForeignKeyConstraint baseTableName="users" baseColumnNames="customer_id"
                                  constraintName="fk_user_customer" referencedTableName="customers"
@@ -94,6 +91,16 @@
             <column name="last_name" value="User"></column>
             <column name="password" value="$2a$10$XstEmOlC.ozlJnRIa91qc.2j/0IF7j0oS02cL3RAOCXSck6qFO9.a"></column>
             <column name="roles" value="ADMIN"></column>
+            <column name="enabled" valueBoolean="true"></column>
+            <column name="createdon" valueComputed="CURRENT_TIMESTAMP"/>
+        </insert>
+        <insert tableName="users">
+            <column name="id" value="100001"/>
+            <column name="username" value="visitor"></column>
+            <column name="first_name" value="Visitor"></column>
+            <column name="last_name" value="User"></column>
+            <column name="password" value="$2a$10$XstEmOlC.ozlJnRIa91qc.2j/0IF7j0oS02cL3RAOCXSck6qFO9.a"></column>
+            <column name="roles" value="VISITOR"></column>
             <column name="enabled" valueBoolean="true"></column>
             <column name="createdon" valueComputed="CURRENT_TIMESTAMP"/>
         </insert>

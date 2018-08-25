@@ -1,11 +1,22 @@
 package com.inventnow.projectx.user.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
-@Data
-public class CustomerDto {
+import javax.validation.constraints.NotNull;
+import java.util.Date;
 
-    private User user;
+@Data
+public class CustomerRegistration {
+
+    private UserInfo user;
+
+    @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private Date dateOfBirth;
+
+    @NotNull
+    private String cityOfBirth;
 
     private IdentityType identityType;
 

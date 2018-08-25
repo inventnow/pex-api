@@ -23,7 +23,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
-@RequestMapping("/v1/user")
+@RequestMapping("/v1/users")
 @Api(description = "Set of operation for user setting and info")
 public class UserController {
 

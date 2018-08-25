@@ -18,11 +18,11 @@ public class RestExceptionHandler {
                 HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleGenericException(Exception notFoundException) {
-        return new ResponseEntity<>(new ErrorResponse("GENERIC_ERROR", notFoundException.getMessage()),
-                HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<ErrorResponse> handleGenericException(Exception notFoundException) {
+//        return new ResponseEntity<>(new ErrorResponse("GENERIC_ERROR", notFoundException.getMessage()),
+//                HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
 
     @ExceptionHandler(UserAlreadyRegisteredException.class)
     public ResponseEntity<ErrorResponse> handleDataAlreadyExist(UserAlreadyRegisteredException conflictException) {
