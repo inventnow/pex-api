@@ -26,21 +26,29 @@ public class TransactionController {
         transaction.setType(TransactionType.EARNED);
         transaction.setAmount(new BigDecimal(25000));
         Merchant merchant = new Merchant();
-        merchant.setId(5000000L);
+        merchant.setId(500000L);
         merchant.setMerchantName("Starbuck");
         transaction.setMerchant(merchant);
 
 
         Transaction transaction2 = new Transaction();
-        transaction2.setDate(LocalDate.of(2018, 07, 11));
-        transaction2.setPoints(300L);
-        transaction.setType(TransactionType.EARNED);
+        transaction2.setDate(LocalDate.of(2018, 05, 02));
+        transaction2.setPoints(500L);
+        transaction2.setType(TransactionType.EARNED);
         transaction2.setAmount(new BigDecimal(25000));
-        Merchant merchant2 = new Merchant();
-        merchant2.setId(5000001L);
-        merchant2.setMerchantName("Ny.Suharti");
-        transaction2.setMerchant(merchant2);
+        transaction2.setMerchant(merchant);
 
-        return Lists.newArrayList(transaction, transaction2);
+
+        Transaction transaction3 = new Transaction();
+        transaction3.setDate(LocalDate.of(2018, 07, 11));
+        transaction3.setPoints(300L);
+        transaction3.setType(TransactionType.REDEEM);
+        transaction3.setAmount(new BigDecimal(25000));
+        Merchant merchant2 = new Merchant();
+        merchant2.setId(500001L);
+        merchant2.setMerchantName("Ny.Suharti");
+        transaction3.setMerchant(merchant2);
+
+        return Lists.newArrayList(transaction, transaction2,transaction3);
     }
 }

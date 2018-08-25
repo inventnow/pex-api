@@ -6,16 +6,17 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <changeSet id="002001" author="eldrid.aditya">
-        <comment>user table</comment>
-        <createSequence incrementBy="1" startValue="500000" sequenceName="seq_user"/>
+    <changeSet id="002000" author="eldrid.aditya">
+        <comment>users table</comment>
+        <createSequence incrementBy="1" startValue="500000" sequenceName="seq_users"/>
         <createTable tableName="users">
             <column name="id" type="${key}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="username" type="${smallString}"></column>
+            <column name="customer_id" type="${key}"></column>
             <column name="first_name" type="${longString}"></column>
             <column name="last_name" type="${longString}"></column>
+            <column name="username" type="${smallString}"></column>
             <column name="password" type="${smallString}"></column>
             <column name="roles" type="${longString}"></column>
             <column name="enabled" type="boolean"></column>
@@ -23,7 +24,68 @@
         </createTable>
     </changeSet>
 
+
+    <changeSet id="002001" author="eldrid.aditya">
+        <comment>customers table</comment>
+        <createSequence incrementBy="1" startValue="500000" sequenceName="seq_customers"/>
+        <createTable tableName="customers">
+            <column name="id" type="${key}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="card_id" type="${key}"></column>
+            <column name="first_name" type="${longString}"></column>
+            <column name="last_name" type="${longString}"></column>
+            <column name="city_of_birth" type="${smallString}"></column>
+            <column name="date_of_birth" type="${date}"></column>
+            <column name="email_address" type="${smallString}"></column>
+            <column name="identity_type" type="${enumString}"></column>
+            <column name="identity_no" type="${smallString}"></column>
+            <column name="address_street" type="${longString}"></column>
+            <column name="address_city" type="${smallString}"></column>
+            <column name="address_postal_code" type="${smallString}"></column>
+            <column name="home_phone" type="${smallString}"></column>
+            <column name="mobile_phone1" type="${smallString}"></column>
+            <column name="mobile_phone2" type="${smallString}"></column>
+            <column name="createdon" type="${timestamp}"></column>
+        </createTable>
+
+    </changeSet>
+
+
     <changeSet id="002002" author="eldrid.aditya">
+        <comment>cards table</comment>
+        <createSequence incrementBy="1" startValue="500000" sequenceName="seq_cards"/>
+        <createTable tableName="cards">
+            <column name="id" type="${key}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="card_no" type="${smallString}"></column>
+            <column name="status" type="${enumString}"></column>
+            <column name="createdon" type="${timestamp}"></column>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet id="002003" author="eldrid.aditya">
+        <comment>create fk and indices</comment>
+        <addForeignKeyConstraint baseTableName="customers" baseColumnNames="card_id"
+                                 constraintName="fk_customer_cards" referencedTableName="cards"
+                                 referencedColumnNames="id"/>
+        <createIndex tableName="customers" indexName="idx_customer_card_id">
+            <column name="card_id"></column>
+        </createIndex>
+        <createIndex tableName="cards" indexName="idx_cards_card_no">
+            <column name="card_no"></column>
+        </createIndex>
+        <addForeignKeyConstraint baseTableName="users" baseColumnNames="customer_id"
+                                 constraintName="fk_user_customer" referencedTableName="customers"
+                                 referencedColumnNames="id"/>
+        <createIndex tableName="users" indexName="idx_user_customer">
+            <column name="customer_id"></column>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="002004" author="eldrid.aditya">
         <comment>insert initial user</comment>
         <insert tableName="users">
             <column name="id" value="100000"/>

@@ -1,11 +1,11 @@
 package com.inventnow.projectx.user.dto;
 
-        import io.swagger.annotations.ApiModelProperty;
-        import lombok.Data;
-        import org.springframework.hateoas.ResourceSupport;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import org.springframework.hateoas.ResourceSupport;
 
-        import java.util.List;
-        import java.util.Set;
+import java.util.List;
+import java.util.Set;
 
 @Data
 public class UserHome extends ResourceSupport {

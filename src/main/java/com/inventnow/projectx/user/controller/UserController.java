@@ -35,7 +35,6 @@ public class UserController {
     @ApiOperation("Get user latest info (Points, authorization, latest promo")
     public UserHome getUserInfo(OAuth2Authentication oauth2User) {
         UserEntity userEntity = userBusinessService.getUserDetails(oauth2User.getName());
-
         UserHome userHome = new UserHome();
         userHome.setUserId(userEntity.getId());
         userHome.setFirstName(userEntity.getFirstName());

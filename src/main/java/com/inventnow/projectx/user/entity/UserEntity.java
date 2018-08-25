@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -14,12 +16,12 @@ import java.util.Date;
 
 @Entity
 @Table(name = "users")
-@SequenceGenerator(name = "seq_user", sequenceName = "seq_user", allocationSize = 1)
+@SequenceGenerator(name = "seq_users", sequenceName = "seq_users", allocationSize = 1)
 @Data
 public class UserEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_user")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_users")
     private Long id;
 
     private String username;
@@ -33,6 +35,10 @@ public class UserEntity {
     private boolean enabled;
 
     private String roles;
+
+    @OneToOne
+    @JoinColumn(name = "CUSTOMER_ID")
+    private CustomerEntity customerEntity;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdon;

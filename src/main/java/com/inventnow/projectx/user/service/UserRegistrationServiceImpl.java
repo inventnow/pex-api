@@ -3,6 +3,7 @@ package com.inventnow.projectx.user.service;
 import com.inventnow.projectx.exception.BadRequestException;
 import com.inventnow.projectx.security.RoleEnum;
 import com.inventnow.projectx.user.dto.User;
+import com.inventnow.projectx.user.entity.CustomerEntity;
 import com.inventnow.projectx.user.entity.UserEntity;
 import com.inventnow.projectx.user.exception.UserAlreadyRegisteredException;
 import com.inventnow.projectx.user.repository.UserRepository;

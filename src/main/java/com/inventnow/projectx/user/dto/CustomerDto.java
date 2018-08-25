@@ -5,7 +5,6 @@ import lombok.Data;
 @Data
 public class CustomerDto {
 
-
     private User user;
 
     private IdentityType identityType;
@@ -20,8 +19,8 @@ public class CustomerDto {
 
     private String homePhone;
 
-    private String mobilePhone;
+    private String mobilePhone1;
 
-    private String securityQuestions;
+    private String mobilePhone2;
 
 }
