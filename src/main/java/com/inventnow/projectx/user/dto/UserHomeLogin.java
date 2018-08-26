@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 @Data
-public class UserHome extends ResourceSupport {
+public class UserHomeLogin extends ResourceSupport {
 
     @ApiModelProperty(value = "User ID")
     private Long userId;

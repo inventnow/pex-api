@@ -3,7 +3,7 @@ package com.inventnow.projectx.user.controller;
 import com.inventnow.projectx.transaction.controller.TransactionController;
 import com.inventnow.projectx.user.dto.CustomerRegistration;
 import com.inventnow.projectx.user.dto.Promo;
-import com.inventnow.projectx.user.dto.UserHome;
+import com.inventnow.projectx.user.dto.UserHomeLogin;
 import com.inventnow.projectx.user.entity.UserEntity;
 import com.inventnow.projectx.user.service.UserBusinessService;
 import com.inventnow.projectx.user.service.UserRegistrationService;
@@ -46,15 +46,15 @@ public class UserController {
     @PostMapping(value = {"/info"}, produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation("Get user latest info (Points, authorization, latest promo")
-    public UserHome getUserInfo(OAuth2Authentication oauth2User) {
+    public UserHomeLogin getUserInfo(OAuth2Authentication oauth2User) {
         UserEntity userEntity = userBusinessService.getUserDetails(oauth2User.getName());
-        UserHome userHome = new UserHome();
-        userHome.setUserId(userEntity.getId());
-        userHome.setFirstName(userEntity.getFirstName());
-        userHome.setLastName(userEntity.getLastName());
-        userHome.setUserName(oauth2User.getName());
-        userHome.setRoles(AuthorityUtils.authorityListToSet(oauth2User.getAuthorities()));
-        userHome.setTotalPoints(10500L);
+        UserHomeLogin userHomeLogin = new UserHomeLogin();
+        userHomeLogin.setUserId(userEntity.getId());
+        userHomeLogin.setFirstName(userEntity.getFirstName());
+        userHomeLogin.setLastName(userEntity.getLastName());
+        userHomeLogin.setUserName(oauth2User.getName());
+        userHomeLogin.setRoles(AuthorityUtils.authorityListToSet(oauth2User.getAuthorities()));
+        userHomeLogin.setTotalPoints(10500L);
         List<Promo> promoList = new ArrayList<>();
 
         Promo promo1 = new Promo(1L, "IMAGE1");
@@ -64,9 +64,9 @@ public class UserController {
         promoList.add(promo1);
         promoList.add(promo2);
 
-        userHome.setPromos(promoList);
+        userHomeLogin.setPromos(promoList);
 
-        userHome.add(linkTo(methodOn(TransactionController.class).getTransactions(userEntity.getId())).withRel("transactions"));
-        return userHome;
+        userHomeLogin.add(linkTo(methodOn(TransactionController.class).getTransactions(userEntity.getId())).withRel("transactions"));
+        return userHomeLogin;
     }
 }

@@ -24,9 +24,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers("/v1/user/admin/**").hasAnyAuthority(ADMIN.name(), MERCHANT_CASHIER.name(), MERCHANT_SUPERVISOR.name())
                 .antMatchers("/v1/user/signup").hasAnyAuthority(CUSTOMER.name(), ADMIN.name(), VISITOR.name())
                 .antMatchers("/v1/user/info").hasAnyAuthority(CUSTOMER.name(), ADMIN.name(), MERCHANT_CASHIER.name(), MERCHANT_SUPERVISOR.name(), VISITOR.name())
-                .antMatchers(HttpMethod.POST, "/v1/merchants/transaction").hasAnyAuthority(ADMIN.name(), MERCHANT_CASHIER.name(), MERCHANT_SUPERVISOR.name())
-                .antMatchers(HttpMethod.POST, "/v1/merchants/securitycode").hasAnyAuthority(ADMIN.name(), MERCHANT_SUPERVISOR.name())
-                .antMatchers(HttpMethod.GET, "/v1/merchants/**").hasAnyAuthority(ADMIN.name(), MERCHANT_SUPERVISOR.name())
+                .antMatchers("/v1/merchants/**").hasAnyAuthority(ADMIN.name(), MERCHANT_SUPERVISOR.name())
                 .antMatchers(HttpMethod.GET, "/v1/transactions/**").hasAnyAuthority(ADMIN.name(), CUSTOMER.name(), MERCHANT_SUPERVISOR.name())
                 .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
     }

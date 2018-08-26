@@ -1,5 +1,6 @@
 package com.inventnow.projectx.user.service;
 
+import com.inventnow.projectx.user.dto.UserHomeLogin;
 import com.inventnow.projectx.user.entity.UserEntity;
 import com.inventnow.projectx.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,5 +15,10 @@ public class UserBusinessServiceImpl implements UserBusinessService {
     @Override
     public UserEntity getUserDetails(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public UserHomeLogin getUserDetailsInfo(String username) {
+        return null;
     }
 }

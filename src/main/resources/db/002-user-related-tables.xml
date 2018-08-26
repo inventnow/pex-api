@@ -14,6 +14,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="customer_id" type="${key}"></column>
+            <column name="merchant_id" type="${key}"></column>
             <column name="first_name" type="${longString}"></column>
             <column name="last_name" type="${longString}"></column>
             <column name="username" type="${smallString}"></column>

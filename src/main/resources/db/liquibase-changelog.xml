@@ -15,9 +15,13 @@
     <property name="timestamp" value="timestamp"/>
     <property name="now" value="now()"/>
     <property name="money" value="money"/>
+    <property name="text" value="text"/>
+
     <property name="realNumber" value="numeric(16,4)"/>
     <property name="integer" value="int"/>
 
     <include file="001-oauth2-schema.xml" relativeToChangelogFile="true"/>
     <include file="002-user-related-tables.xml" relativeToChangelogFile="true"/>
+    <include file="003-merchant-related-tables.xml" relativeToChangelogFile="true"/>
+
 </databaseChangeLog>
