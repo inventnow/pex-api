@@ -1,5 +1,6 @@
 package com.inventnow.projectx.user.entity;
 
+import com.inventnow.projectx.merchant.entity.MerchantEntity;
 import lombok.Data;
 
 import javax.persistence.CascadeType;
@@ -11,18 +12,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "users")
-@SequenceGenerator(name = "seq_users", sequenceName = "seq_users", allocationSize = 1)
+@Table(name = "pex_user")
+@SequenceGenerator(name = "seq_pex_user", sequenceName = "seq_pex_user", allocationSize = 1)
 @Data
 public class UserEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_users")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_pex_user")
     private Long id;
 
     private String username;
@@ -41,6 +40,9 @@ public class UserEntity {
     @JoinColumn(name = "CUSTOMER_ID")
     private CustomerEntity customerEntity;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdon;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "MERCHANT_ID")
+    private MerchantEntity merchantEntity;
+
+    private LocalDateTime createdon;
 }

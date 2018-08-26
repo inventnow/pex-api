@@ -7,14 +7,15 @@ import com.inventnow.projectx.user.repository.CardsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Service
 public class CardsRegistrationServiceImpl implements CardsRegistrationService {
 
     @Autowired
-    private CardsRepository cardsRepository;
+    private CardsRepository cardRepository;
 
     @Override
     public CardEntity registerNewCardToCustomer(CustomerEntity customerEntity) {
@@ -22,22 +23,22 @@ public class CardsRegistrationServiceImpl implements CardsRegistrationService {
         String cardNo = buildCardNo(customerEntity.getDateOfBirth());
         CardEntity cardEntity = new CardEntity();
         cardEntity.setStatus(CardStatus.ACTIVE);
-        cardEntity.setCreatedon(new Date());
+        cardEntity.setCreatedon(LocalDateTime.now());
         cardEntity.setCardNo(cardNo);
         cardEntity.setCustomer(customerEntity);
-        cardsRepository.save(cardEntity);
+        cardRepository.save(cardEntity);
 
         return cardEntity;
     }
 
-    private String buildCardNo(Date dateOfBirth) {
-        CardEntity cardEntity = cardsRepository.findTopByOrderByIdDesc();
+    private String buildCardNo(LocalDate dateOfBirth) {
+        CardEntity cardEntity = cardRepository.findTopByOrderByIdDesc();
 
         StringBuilder sbCardNo = new StringBuilder();
-        String pattern = "yyyyMMdd";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
-        String date = simpleDateFormat.format(dateOfBirth);
+        DateTimeFormatter formatters = DateTimeFormatter.ofPattern("yy");
+
+        String yearDob = dateOfBirth.format(formatters);
 
         Long cardId = null;
         if (cardEntity == null) {
@@ -47,7 +48,7 @@ public class CardsRegistrationServiceImpl implements CardsRegistrationService {
         }
 
         String timemillis = String.valueOf(System.currentTimeMillis());
-        sbCardNo.append(String.valueOf(cardId) + date + timemillis.substring(timemillis.length() - 4, timemillis.length()));
+        sbCardNo.append(String.valueOf(cardId) + yearDob + timemillis.substring(timemillis.length() - 4, timemillis.length()));
         return sbCardNo.toString();
     }
 }

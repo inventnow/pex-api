@@ -19,17 +19,17 @@ public class RegistrationEventListener {
     private UserRepository userRepository;
 
     @Autowired
-    private CardsRegistrationService cardsRegistrationService;
+    private CardsRegistrationService cardRegistrationService;
 
     @Async
     @EventListener
-    public void userRegistrationListener(NewUserRegistrationEvent newUserRegistrationEvent) {
-        UserEntity userEntity = userRepository.findById(newUserRegistrationEvent.getUserId()).get();
+    public void userRegistrationListener(UserRegisteredEvent userRegisteredEvent) {
+        UserEntity userEntity = userRepository.findById(userRegisteredEvent.getUserId()).get();
 
         CustomerEntity customerEntity = userEntity.getCustomerEntity();
 
         log.info("===Registering card for customer id:{}===", customerEntity.getId());
-        CardEntity cardEntity = cardsRegistrationService.registerNewCardToCustomer(customerEntity);
+        CardEntity cardEntity = cardRegistrationService.registerNewCardToCustomer(customerEntity);
 
 
         log.info("===Send welcome email for customer id:{} with card no:{}===", customerEntity.getId(), cardEntity.getCardNo());

@@ -7,9 +7,9 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet id="002000" author="eldrid.aditya">
-        <comment>users table</comment>
-        <createSequence incrementBy="1" startValue="500000" sequenceName="seq_users"/>
-        <createTable tableName="users">
+        <comment>user table</comment>
+        <createSequence incrementBy="1" startValue="500000" sequenceName="seq_pex_user"/>
+        <createTable tableName="pex_user">
             <column name="id" type="${key}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -26,9 +26,9 @@
 
 
     <changeSet id="002001" author="eldrid.aditya">
-        <comment>customers table</comment>
-        <createSequence incrementBy="1" startValue="500000" sequenceName="seq_customers"/>
-        <createTable tableName="customers">
+        <comment>customer table</comment>
+        <createSequence incrementBy="1" startValue="500000" sequenceName="seq_pex_customer"/>
+        <createTable tableName="pex_customer">
             <column name="id" type="${key}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -52,9 +52,9 @@
 
 
     <changeSet id="002002" author="eldrid.aditya">
-        <comment>cards table</comment>
-        <createSequence incrementBy="1" startValue="500000" sequenceName="seq_cards"/>
-        <createTable tableName="cards">
+        <comment>card table</comment>
+        <createSequence incrementBy="1" startValue="500000" sequenceName="seq_pex_card"/>
+        <createTable tableName="pex_card">
             <column name="id" type="${key}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -68,23 +68,23 @@
 
     <changeSet id="002003" author="eldrid.aditya">
         <comment>create fk and indices</comment>
-        <addForeignKeyConstraint baseTableName="cards" baseColumnNames="customer_id"
-                                 constraintName="fk_cards_customer" referencedTableName="customers"
+        <addForeignKeyConstraint baseTableName="pex_card" baseColumnNames="customer_id"
+                                 constraintName="fk_card_customer" referencedTableName="pex_customer"
                                  referencedColumnNames="id"/>
-        <createIndex tableName="cards" indexName="idx_card_customer_id">
+        <createIndex tableName="pex_card" indexName="idx_card_customer_id">
             <column name="customer_id"></column>
         </createIndex>
-        <addForeignKeyConstraint baseTableName="users" baseColumnNames="customer_id"
-                                 constraintName="fk_user_customer" referencedTableName="customers"
+        <addForeignKeyConstraint baseTableName="pex_user" baseColumnNames="customer_id"
+                                 constraintName="fk_user_customer" referencedTableName="pex_customer"
                                  referencedColumnNames="id"/>
-        <createIndex tableName="users" indexName="idx_user_customer">
+        <createIndex tableName="pex_user" indexName="idx_user_customer">
             <column name="customer_id"></column>
         </createIndex>
     </changeSet>
 
     <changeSet id="002004" author="eldrid.aditya">
         <comment>insert initial user</comment>
-        <insert tableName="users">
+        <insert tableName="pex_user">
             <column name="id" value="100000"/>
             <column name="username" value="bedhes@gmail.com"></column>
             <column name="first_name" value="Bedhes"></column>
@@ -94,7 +94,7 @@
             <column name="enabled" valueBoolean="true"></column>
             <column name="createdon" valueComputed="CURRENT_TIMESTAMP"/>
         </insert>
-        <insert tableName="users">
+        <insert tableName="pex_user">
             <column name="id" value="100001"/>
             <column name="username" value="visitor"></column>
             <column name="first_name" value="Visitor"></column>

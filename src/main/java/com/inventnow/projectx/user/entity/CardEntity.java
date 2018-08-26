@@ -14,18 +14,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
-@SequenceGenerator(name = "seq_cards", sequenceName = "seq_cards", allocationSize = 1)
-@Table(name = "cards")
+@SequenceGenerator(name = "seq_pex_card", sequenceName = "seq_pex_card", allocationSize = 1)
+@Table(name = "pex_card")
 public class CardEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_cards")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_pex_card")
     private Long id;
 
     private String cardNo;
@@ -37,6 +35,5 @@ public class CardEntity {
     @Enumerated(EnumType.STRING)
     private CardStatus status;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdon;
+    private LocalDateTime createdon;
 }

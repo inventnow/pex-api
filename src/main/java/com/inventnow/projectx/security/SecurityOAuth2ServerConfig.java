@@ -37,8 +37,6 @@ public class SecurityOAuth2ServerConfig extends AuthorizationServerConfigurerAda
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
                 .withClient("pex")
-                .accessTokenValiditySeconds(21600)
-                .refreshTokenValiditySeconds(21600)
                 .secret(passwordEncoder.encode("secret"))
                 .authorizedGrantTypes("refresh_token", "password", "client_credentials")
                 .scopes("webclient", "mobileclient");

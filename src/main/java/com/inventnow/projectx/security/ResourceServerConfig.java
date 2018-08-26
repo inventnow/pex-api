@@ -21,9 +21,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/v1/ecoupons/**").hasAnyAuthority(CUSTOMER.name(), ADMIN.name())
-                .antMatchers("/v1/users/admin/**").hasAnyAuthority(ADMIN.name(), MERCHANT_CASHIER.name(), MERCHANT_SUPERVISOR.name())
-                .antMatchers("/v1/users/signup").hasAnyAuthority(CUSTOMER.name(), ADMIN.name(), VISITOR.name())
-                .antMatchers("/v1/users/info").hasAnyAuthority(CUSTOMER.name(), ADMIN.name(), MERCHANT_CASHIER.name(), MERCHANT_SUPERVISOR.name(), VISITOR.name())
+                .antMatchers("/v1/user/admin/**").hasAnyAuthority(ADMIN.name(), MERCHANT_CASHIER.name(), MERCHANT_SUPERVISOR.name())
+                .antMatchers("/v1/user/signup").hasAnyAuthority(CUSTOMER.name(), ADMIN.name(), VISITOR.name())
+                .antMatchers("/v1/user/info").hasAnyAuthority(CUSTOMER.name(), ADMIN.name(), MERCHANT_CASHIER.name(), MERCHANT_SUPERVISOR.name(), VISITOR.name())
                 .antMatchers(HttpMethod.POST, "/v1/merchants/transaction").hasAnyAuthority(ADMIN.name(), MERCHANT_CASHIER.name(), MERCHANT_SUPERVISOR.name())
                 .antMatchers(HttpMethod.POST, "/v1/merchants/securitycode").hasAnyAuthority(ADMIN.name(), MERCHANT_SUPERVISOR.name())
                 .antMatchers(HttpMethod.GET, "/v1/merchants/**").hasAnyAuthority(ADMIN.name(), MERCHANT_SUPERVISOR.name())

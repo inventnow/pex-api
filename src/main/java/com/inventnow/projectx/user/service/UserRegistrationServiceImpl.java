@@ -8,7 +8,7 @@ import com.inventnow.projectx.user.dto.User;
 import com.inventnow.projectx.user.dto.UserInfo;
 import com.inventnow.projectx.user.entity.CustomerEntity;
 import com.inventnow.projectx.user.entity.UserEntity;
-import com.inventnow.projectx.user.events.NewUserRegistrationEvent;
+import com.inventnow.projectx.user.events.UserRegisteredEvent;
 import com.inventnow.projectx.user.exception.UserAlreadyRegisteredException;
 import com.inventnow.projectx.user.repository.CustomerRepository;
 import com.inventnow.projectx.user.repository.UserRepository;
@@ -18,7 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Service
 public class UserRegistrationServiceImpl implements UserRegistrationService {
@@ -49,7 +49,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         userEntity.setEnabled(true);
         userEntity.setUsername(user.getEmail());
         userEntity.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        userEntity.setCreatedon(new Date());
+        userEntity.setCreatedon(LocalDateTime.now());
 
         StringBuilder sbRole = new StringBuilder();
         for (RoleEnum roleEnum : user.getRoles()) {
@@ -77,7 +77,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 
         userRepository.save(savedUser);
 
-        applicationEventPublisher.publishEvent(new NewUserRegistrationEvent(savedUser.getId()));
+        applicationEventPublisher.publishEvent(new UserRegisteredEvent(savedUser.getId()));
     }
 
     private UserEntity registerCustomerUser(UserInfo userInfo) {
@@ -108,7 +108,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 
         customerEntity.setIdentityType(customerRegistration.getIdentityType());
         customerEntity.setIdentityNo(customerRegistration.getIdentityNo());
-        customerEntity.setCreatedon(new Date());
+        customerEntity.setCreatedon(LocalDateTime.now());
         return customerEntity;
     }
 }

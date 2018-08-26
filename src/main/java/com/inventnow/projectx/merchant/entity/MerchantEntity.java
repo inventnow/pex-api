@@ -1,6 +1,7 @@
-package com.inventnow.projectx.user.entity;
+package com.inventnow.projectx.merchant.entity;
 
 import com.inventnow.projectx.user.dto.IdentityType;
+import com.inventnow.projectx.user.entity.CardEntity;
 import lombok.Data;
 
 import javax.persistence.CascadeType;
@@ -20,31 +21,17 @@ import java.util.List;
 
 @Data
 @Entity
-@SequenceGenerator(name = "seq_pex_customer", sequenceName = "seq_pex_customer", allocationSize = 1)
-@Table(name = "pex_customer")
-public class CustomerEntity {
+@SequenceGenerator(name = "seq_pex_merchant", sequenceName = "seq_pex_merchant", allocationSize = 1)
+@Table(name = "pex_merchant")
+public class MerchantEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_pex_customer")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_pex_merchant")
     private Long id;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CardEntity> card = new ArrayList<>();
-
-    private String firstName;
-
-    private String lastName;
-
-    private String cityOfBirth;
-
-    private LocalDate dateOfBirth;
+    private String name;
 
     private String emailAddress;
-
-    @Enumerated(EnumType.STRING)
-    private IdentityType identityType;
-
-    private String identityNo;
 
     private String addressStreet;
 
