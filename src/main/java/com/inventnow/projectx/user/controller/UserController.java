@@ -1,10 +1,12 @@
 package com.inventnow.projectx.user.controller;
 
 import com.inventnow.projectx.transaction.controller.TransactionController;
+import com.inventnow.projectx.user.dto.CustomerRegistration;
 import com.inventnow.projectx.user.dto.Promo;
 import com.inventnow.projectx.user.dto.UserHome;
 import com.inventnow.projectx.user.entity.UserEntity;
 import com.inventnow.projectx.user.service.UserBusinessService;
+import com.inventnow.projectx.user.service.UserRegistrationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,6 +32,16 @@ public class UserController {
 
     @Autowired
     private UserBusinessService userBusinessService;
+
+    @Autowired
+    private UserRegistrationService userRegistrationService;
+
+    @PostMapping("/signup")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void registerUser(@RequestBody CustomerRegistration customerRegistration) {
+
+        userRegistrationService.registerCustomer(customerRegistration);
+    }
 
     @PostMapping(value = {"/info"}, produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
@@ -56,5 +69,4 @@ public class UserController {
         userHome.add(linkTo(methodOn(TransactionController.class).getTransactions(userEntity.getId())).withRel("transactions"));
         return userHome;
     }
-
 }
