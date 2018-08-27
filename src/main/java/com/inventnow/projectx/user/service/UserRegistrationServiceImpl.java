@@ -2,8 +2,12 @@ package com.inventnow.projectx.user.service;
 
 import com.google.common.collect.Lists;
 import com.inventnow.projectx.exception.BadRequestException;
+import com.inventnow.projectx.exception.NotFoundException;
+import com.inventnow.projectx.merchant.entity.MerchantEntity;
+import com.inventnow.projectx.merchant.repository.MerchantRepository;
 import com.inventnow.projectx.security.RoleEnum;
 import com.inventnow.projectx.user.dto.CustomerRegistration;
+import com.inventnow.projectx.user.dto.MerchantUserRegistration;
 import com.inventnow.projectx.user.dto.User;
 import com.inventnow.projectx.user.dto.UserInfo;
 import com.inventnow.projectx.user.entity.CustomerEntity;
@@ -19,6 +23,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserRegistrationServiceImpl implements UserRegistrationService {
@@ -28,6 +34,9 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
+    private MerchantRepository merchantRepository;
 
     @Autowired
     private ApplicationEventPublisher applicationEventPublisher;
@@ -67,7 +76,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 
         UserInfo userInfo = customerRegistration.getUser();
 
-        UserEntity savedUser = registerCustomerUser(userInfo);
+        UserEntity savedUser = registerUser(userInfo, Lists.newArrayList(RoleEnum.CUSTOMER));
 
         CustomerEntity customerEntity = mapToCustomerEntity(customerRegistration, savedUser);
 
@@ -80,12 +89,25 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         applicationEventPublisher.publishEvent(new UserRegisteredEvent(savedUser.getId()));
     }
 
-    private UserEntity registerCustomerUser(UserInfo userInfo) {
+    @Override
+    public void registerMerchantUser(MerchantUserRegistration merchantUserRegistration) {
+        Optional<MerchantEntity> merchantEntity = merchantRepository.findById(merchantUserRegistration.getMerchantId());
+        if (!merchantEntity.isPresent()) {
+            throw new NotFoundException("Merchant Entity ID:" + merchantUserRegistration.getMerchantId() + " not found");
+        }
+        UserInfo userInfo = merchantUserRegistration.getUser();
+
+        UserEntity userEntity = registerUser(userInfo, Lists.newArrayList(merchantUserRegistration.getRole()));
+        userEntity.setMerchantEntity(merchantEntity.get());
+        userRepository.save(userEntity);
+    }
+
+    private UserEntity registerUser(UserInfo userInfo, List<RoleEnum> roles) {
         User user = new User();
         user.setFirstName(userInfo.getFirstName());
         user.setLastName(userInfo.getLastName());
         user.setEmail(userInfo.getEmail());
-        user.setRoles(Lists.newArrayList(RoleEnum.CUSTOMER));
+        user.setRoles(roles);
         user.setPassword(userInfo.getPassword());
         user.setConfirmPassword(userInfo.getConfirmPassword());
 

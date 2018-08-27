@@ -1,5 +1,6 @@
 package com.inventnow.projectx.user.controller;
 
+import com.inventnow.projectx.user.dto.MerchantUserRegistration;
 import com.inventnow.projectx.user.dto.User;
 import com.inventnow.projectx.user.service.UserRegistrationService;
 import io.swagger.annotations.Api;
@@ -27,5 +28,12 @@ public class UserAdminController {
         userRegistrationService.registerUser(user);
     }
 
-   
+
+    @PostMapping("/registration/merchantuser")
+    @ApiOperation("Merchant User registration, return 201 if successfully created")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void registerMerchantUser(@RequestBody MerchantUserRegistration merchantUser) {
+        userRegistrationService.registerMerchantUser(merchantUser);
+    }
+
 }
