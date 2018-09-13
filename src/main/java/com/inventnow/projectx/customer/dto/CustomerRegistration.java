@@ -1,12 +1,18 @@
-package com.inventnow.projectx.user.dto;
+package com.inventnow.projectx.customer.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Data;
+import com.inventnow.projectx.user.dto.IdentityType;
+import com.inventnow.projectx.user.dto.UserInfo;
+import lombok.Builder;
+import lombok.ToString;
+import lombok.Value;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
-@Data
+@Value
+@Builder
+@ToString
 public class CustomerRegistration {
 
     private UserInfo user;

@@ -1,13 +1,21 @@
 package com.inventnow.projectx.user.dto;
 
-import lombok.Data;
+import lombok.Builder;
+import lombok.ToString;
+import lombok.Value;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
-@Data
+@Valid
+@Value
+@Builder
+@ToString
 public class UserInfo {
 
     @NotNull
+    @Email
     private String email;
 
     @NotNull

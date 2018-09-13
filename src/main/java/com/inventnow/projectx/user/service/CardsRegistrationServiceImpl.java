@@ -2,7 +2,7 @@ package com.inventnow.projectx.user.service;
 
 import com.inventnow.projectx.user.dto.CardStatus;
 import com.inventnow.projectx.user.entity.CardEntity;
-import com.inventnow.projectx.user.entity.CustomerEntity;
+import com.inventnow.projectx.customer.entity.CustomerEntity;
 import com.inventnow.projectx.user.repository.CardsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

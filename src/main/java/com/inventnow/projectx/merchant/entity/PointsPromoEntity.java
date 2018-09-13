@@ -13,6 +13,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @Entity
@@ -31,6 +32,10 @@ public class PointsPromoEntity {
     private LocalDate promoStartDate;
 
     private LocalDate promoEndDate;
+
+    private Date promoStartDateD;
+
+    private Date promoEndDateD;
 
     private Long pointsMultiplication;
 

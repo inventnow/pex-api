@@ -1,7 +1,7 @@
 package com.inventnow.projectx.user.controller;
 
 import com.inventnow.projectx.transaction.controller.TransactionController;
-import com.inventnow.projectx.user.dto.CustomerRegistration;
+import com.inventnow.projectx.customer.dto.CustomerRegistration;
 import com.inventnow.projectx.user.dto.Promo;
 import com.inventnow.projectx.user.dto.UserHomeLogin;
 import com.inventnow.projectx.user.entity.UserEntity;
@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +39,7 @@ public class UserController {
 
     @PostMapping("/signup")
     @ResponseStatus(HttpStatus.CREATED)
-    public void registerUser(@RequestBody CustomerRegistration customerRegistration) {
+    public void registerUser(@RequestBody @Validated CustomerRegistration customerRegistration) {
 
         userRegistrationService.registerCustomer(customerRegistration);
     }

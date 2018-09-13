@@ -1,6 +1,7 @@
-package com.inventnow.projectx.user.entity;
+package com.inventnow.projectx.customer.entity;
 
 import com.inventnow.projectx.user.dto.IdentityType;
+import com.inventnow.projectx.user.entity.CardEntity;
 import lombok.Data;
 
 import javax.persistence.CascadeType;
