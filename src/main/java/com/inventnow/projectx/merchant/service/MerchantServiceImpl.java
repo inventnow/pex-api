@@ -9,7 +9,6 @@ import com.inventnow.projectx.merchant.repository.MerchantRepository;
 import com.inventnow.projectx.merchant.repository.PointsPromoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -24,11 +23,9 @@ public class MerchantServiceImpl implements MerchantService {
     private PointsPromoRepository pointsPromoRepository;
 
     @Override
-    @Transactional
     public void createMerchant(Merchant merchant) {
         MerchantEntity merchantEntity = new MerchantEntity();
         merchantEntity.setName(merchant.getName());
-        merchantEntity.setImageIcon(merchant.getImageIcon());
         merchantEntity.setAddressCity(merchant.getAddressCity());
         merchantEntity.setAddressPostalCode(merchant.getAddressPostalCode());
         merchantEntity.setAddressCity(merchant.getAddressCity());
@@ -43,7 +40,6 @@ public class MerchantServiceImpl implements MerchantService {
     }
 
     @Override
-    @Transactional
     public void addPromoMerchant(CreatePromo createPromo) {
         Optional<MerchantEntity> merchantEntity = merchantRepository.findById(createPromo.getMerchantId());
         if (!merchantEntity.isPresent()) {

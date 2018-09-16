@@ -22,8 +22,6 @@ public class MerchantEntity {
 
     private String name;
 
-    private String imageIcon;
-
     private String emailAddress;
 
     private String addressStreet;
