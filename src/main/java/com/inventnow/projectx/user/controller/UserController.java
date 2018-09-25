@@ -1,7 +1,7 @@
 package com.inventnow.projectx.user.controller;
 
-import com.inventnow.projectx.transaction.controller.TransactionController;
 import com.inventnow.projectx.customer.dto.CustomerRegistration;
+import com.inventnow.projectx.transaction.controller.TransactionController;
 import com.inventnow.projectx.user.dto.Promo;
 import com.inventnow.projectx.user.dto.UserHomeLogin;
 import com.inventnow.projectx.user.entity.UserEntity;
@@ -11,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.validation.annotation.Validated;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,9 +39,9 @@ public class UserController {
     @Autowired
     private UserRegistrationService userRegistrationService;
 
-    @PostMapping("/signup")
+    @PostMapping(value = "/signup",consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public void registerUser(@RequestBody @Validated CustomerRegistration customerRegistration) {
+    public void registerUser(@RequestBody @Valid CustomerRegistration customerRegistration) {
 
         userRegistrationService.registerCustomer(customerRegistration);
     }
