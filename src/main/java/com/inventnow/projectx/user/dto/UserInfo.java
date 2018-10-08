@@ -5,7 +5,6 @@ import lombok.ToString;
 import lombok.Value;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 @Valid
@@ -15,7 +14,6 @@ import javax.validation.constraints.NotNull;
 public class UserInfo {
 
     @NotNull
-    @Email
     private String email;
 
     @NotNull

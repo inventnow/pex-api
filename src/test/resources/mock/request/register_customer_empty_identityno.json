@@ -1,0 +1,12 @@
+{
+  "user":{
+    "email" :"jack.sparrow@gmail.com",
+    "firstName":"Jack",
+    "lastName":"Sparrow",
+    "password":"blackpearl",
+    "confirmPassword":"blackpearl"
+  },
+  "dateOfBirth":"1983-11-20",
+  "cityOfBirth":"Jakarta",
+  "identityType":"DRIVING_LICENSE"
+}

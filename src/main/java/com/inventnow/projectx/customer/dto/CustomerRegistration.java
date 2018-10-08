@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.ToString;
 import lombok.Value;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
@@ -15,6 +16,7 @@ import java.time.LocalDate;
 @ToString
 public class CustomerRegistration {
 
+    @Valid
     private UserInfo user;
 
     @NotNull
@@ -24,8 +26,10 @@ public class CustomerRegistration {
     @NotNull
     private String cityOfBirth;
 
+    @NotNull
     private IdentityType identityType;
 
+    @NotNull
     private String identityNo;
 
     private String addressStreet;

@@ -5,9 +5,13 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestControllerAdvice
 public class RestExceptionHandler {
@@ -18,11 +22,17 @@ public class RestExceptionHandler {
                 HttpStatus.NOT_FOUND);
     }
 
-//    @ExceptionHandler(Exception.class)
-//    public ResponseEntity<ErrorResponse> handleGenericException(Exception notFoundException) {
-//        return new ResponseEntity<>(new ErrorResponse("GENERIC_ERROR", notFoundException.getMessage()),
-//                HttpStatus.INTERNAL_SERVER_ERROR);
-//    }
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<List<FieldErrorResponse>> badRequestException(MethodArgumentNotValidException argumentNotValidException) {
+        List<FieldErrorResponse> errorResponses = new ArrayList<>();
+
+        argumentNotValidException.getBindingResult()
+                .getAllErrors()
+                .forEach(fieldError -> errorResponses.add(new FieldErrorResponse(fieldError.getCodes()[0], fieldError.getCode(), fieldError.getDefaultMessage())));
+        return new ResponseEntity<>(errorResponses,
+                HttpStatus.BAD_REQUEST);
+    }
+
 
     @ExceptionHandler(UserAlreadyRegisteredException.class)
     public ResponseEntity<ErrorResponse> handleDataAlreadyExist(UserAlreadyRegisteredException conflictException) {

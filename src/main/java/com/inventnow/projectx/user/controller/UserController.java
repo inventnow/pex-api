@@ -41,7 +41,7 @@ public class UserController {
 
     @PostMapping(value = "/signup",consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public void registerUser(@RequestBody @Valid CustomerRegistration customerRegistration) {
+    public void registerUser(@Valid @RequestBody CustomerRegistration customerRegistration) {
 
         userRegistrationService.registerCustomer(customerRegistration);
     }
