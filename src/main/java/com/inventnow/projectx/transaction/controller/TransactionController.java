@@ -27,7 +27,7 @@ public class TransactionController {
         transaction.setAmount(new BigDecimal(25000));
         Merchant merchant = new Merchant();
         merchant.setId(500000L);
-        merchant.setMerchantName("Starbuck");
+        merchant.setMerchantName("Merchant A");
         transaction.setMerchant(merchant);
 
 
@@ -46,7 +46,7 @@ public class TransactionController {
         transaction3.setAmount(new BigDecimal(25000));
         Merchant merchant2 = new Merchant();
         merchant2.setId(500001L);
-        merchant2.setMerchantName("Ny.Suharti");
+        merchant2.setMerchantName("Merchant B");
         transaction3.setMerchant(merchant2);
 
         return Lists.newArrayList(transaction, transaction2,transaction3);
