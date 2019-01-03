@@ -1,7 +1,7 @@
 package com.inventnow.projectx.user.events;
 
-import com.inventnow.projectx.user.entity.CardEntity;
 import com.inventnow.projectx.customer.entity.CustomerEntity;
+import com.inventnow.projectx.user.entity.CardEntity;
 import com.inventnow.projectx.user.entity.UserEntity;
 import com.inventnow.projectx.user.repository.UserRepository;
 import com.inventnow.projectx.user.service.CardsRegistrationService;
@@ -34,4 +34,5 @@ public class RegistrationEventListener {
 
         log.info("===Send welcome email for customer id:{} with card no:{}===", customerEntity.getId(), cardEntity.getCardNo());
     }
+
 }
