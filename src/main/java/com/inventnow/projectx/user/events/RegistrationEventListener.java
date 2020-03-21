@@ -1,6 +1,6 @@
 package com.inventnow.projectx.user.events;
 
-import com.inventnow.projectx.customer.entity.CustomerEntity;
+import com.inventnow.projectx.registration.entity.CustomerEntity;
 import com.inventnow.projectx.user.entity.CardEntity;
 import com.inventnow.projectx.user.entity.UserEntity;
 import com.inventnow.projectx.user.repository.UserRepository;

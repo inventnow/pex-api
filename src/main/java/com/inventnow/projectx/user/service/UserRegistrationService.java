@@ -1,6 +1,6 @@
 package com.inventnow.projectx.user.service;
 
-import com.inventnow.projectx.customer.dto.CustomerRegistration;
+import com.inventnow.projectx.registration.dto.CustomerRegistration;
 import com.inventnow.projectx.user.dto.MerchantUserRegistration;
 import com.inventnow.projectx.user.dto.User;
 import com.inventnow.projectx.user.entity.UserEntity;

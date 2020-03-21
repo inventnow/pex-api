@@ -1,8 +1,8 @@
 package com.inventnow.projectx.user.service;
 
 import com.google.common.collect.Lists;
-import com.inventnow.projectx.customer.dto.CustomerRegistration;
-import com.inventnow.projectx.customer.event.CustomerRegistrationEvent;
+import com.inventnow.projectx.registration.dto.CustomerRegistration;
+import com.inventnow.projectx.registration.event.CustomerRegistrationEvent;
 import com.inventnow.projectx.exception.BadRequestException;
 import com.inventnow.projectx.exception.NotFoundException;
 import com.inventnow.projectx.merchant.entity.MerchantEntity;

@@ -18,7 +18,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableAuthorizationServer
-public class SecurityOAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
+class SecurityOAuth2ServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -43,7 +43,7 @@ public class SecurityOAuth2ServerConfig extends AuthorizationServerConfigurerAda
     }
 
     @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints){
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints
                 .tokenStore(tokenStore())
                 .authenticationManager(authenticationManager)

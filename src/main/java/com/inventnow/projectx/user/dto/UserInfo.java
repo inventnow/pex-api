@@ -1,16 +1,14 @@
 package com.inventnow.projectx.user.dto;
 
-import lombok.Builder;
-import lombok.ToString;
-import lombok.Value;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+@Data
+@NoArgsConstructor
 @Valid
-@Value
-@Builder
-@ToString
 public class UserInfo {
 
     @NotNull

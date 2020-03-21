@@ -1,4 +1,4 @@
-package com.inventnow.projectx.user.controller;
+package com.inventnow.projectx.registration.adapter.input;
 
 import com.inventnow.projectx.registration.dto.CustomerRegistration;
 import com.inventnow.projectx.transaction.controller.TransactionController;
@@ -26,8 +26,8 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
-@RequestMapping("/v1/users")
-public class UserController {
+@RequestMapping("/v1s")
+public class RegistrationController {
 
     @Autowired
     private UserBusinessService userBusinessService;

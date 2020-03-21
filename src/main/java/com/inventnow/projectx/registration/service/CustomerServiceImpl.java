@@ -1,8 +1,8 @@
-package com.inventnow.projectx.customer.service;
+package com.inventnow.projectx.registration.service;
 
-import com.inventnow.projectx.customer.dto.CustomerRegistration;
-import com.inventnow.projectx.customer.entity.CustomerEntity;
-import com.inventnow.projectx.customer.repository.CustomerRepository;
+import com.inventnow.projectx.registration.dto.CustomerRegistration;
+import com.inventnow.projectx.registration.entity.CustomerEntity;
+import com.inventnow.projectx.registration.repository.CustomerRepository;
 import com.inventnow.projectx.user.entity.UserEntity;
 import com.inventnow.projectx.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

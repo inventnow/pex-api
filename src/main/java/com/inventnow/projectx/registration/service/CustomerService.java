@@ -1,6 +1,6 @@
-package com.inventnow.projectx.customer.service;
+package com.inventnow.projectx.registration.service;
 
-import com.inventnow.projectx.customer.dto.CustomerRegistration;
+import com.inventnow.projectx.registration.dto.CustomerRegistration;
 
 public interface CustomerService {
     void registerCustomer(Long userId, CustomerRegistration customerRegistration);

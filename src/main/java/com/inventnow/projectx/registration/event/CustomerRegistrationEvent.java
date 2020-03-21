@@ -1,6 +1,6 @@
-package com.inventnow.projectx.customer.event;
+package com.inventnow.projectx.registration.event;
 
-import com.inventnow.projectx.customer.dto.CustomerRegistration;
+import com.inventnow.projectx.registration.dto.CustomerRegistration;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.Value;

@@ -1,4 +1,4 @@
-package com.inventnow.projectx.customer.entity;
+package com.inventnow.projectx.registration.entity;
 
 import com.inventnow.projectx.user.dto.IdentityType;
 import com.inventnow.projectx.user.entity.CardEntity;

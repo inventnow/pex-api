@@ -1,31 +1,24 @@
 package com.inventnow.projectx.user.dto;
 
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.springframework.hateoas.ResourceSupport;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.util.List;
 import java.util.Set;
 
 @Data
-public class UserHomeLogin extends ResourceSupport {
+public class UserHomeLogin extends RepresentationModel {
 
-    @ApiModelProperty(value = "User ID")
     private Long userId;
 
-    @ApiModelProperty(value = "User Name")
     private String userName;
 
-    @ApiModelProperty(value = "First Name")
     private String firstName;
 
-    @ApiModelProperty(value = "Last Name")
     private String lastName;
 
-    @ApiModelProperty(value = "Total Points")
     private Long totalPoints;
 
-    @ApiModelProperty(value = "Roles", example = "ADMIN", allowableValues = "ADMIN,CUSTOMER,MERCHANT_SUPERVISOR,MERCHANT_CASHIER,VISITOR")
     private Set<String> roles;
 
     private List<Promo> promos;

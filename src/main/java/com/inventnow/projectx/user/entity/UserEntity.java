@@ -1,6 +1,6 @@
 package com.inventnow.projectx.user.entity;
 
-import com.inventnow.projectx.customer.entity.CustomerEntity;
+import com.inventnow.projectx.registration.entity.CustomerEntity;
 import com.inventnow.projectx.merchant.entity.MerchantEntity;
 import lombok.Data;
 

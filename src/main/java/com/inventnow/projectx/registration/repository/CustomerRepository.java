@@ -1,6 +1,6 @@
-package com.inventnow.projectx.customer.repository;
+package com.inventnow.projectx.registration.repository;
 
-import com.inventnow.projectx.customer.entity.CustomerEntity;
+import com.inventnow.projectx.registration.entity.CustomerEntity;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 

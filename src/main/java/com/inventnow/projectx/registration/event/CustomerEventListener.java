@@ -1,6 +1,6 @@
-package com.inventnow.projectx.customer.event;
+package com.inventnow.projectx.registration.event;
 
-import com.inventnow.projectx.customer.service.CustomerService;
+import com.inventnow.projectx.registration.service.CustomerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
